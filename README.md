@@ -29,6 +29,7 @@ This project will implment the following technologies:
 1. D3
 2. Weback
 3. npm
+4. API https://www.fishwatch.gov/developers
 
 Timeline
 Friday Afternoon & Weekend
