@@ -1,0 +1,42 @@
+{
+  "name": "javascriptproject",
+  "version": "1.0.0",
+  "description": "Navlinks: Portfolio Website: N/A Github: https://github.com/bphan002 LinkedIn: https://www.linkedin.com/in/billy-phan-41014a40/",
+  "main": "index.js",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bphan002/javascriptProject.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bphan002/javascriptProject/issues"
+  },
+  "homepage": "https://github.com/bphan002/javascriptProject#readme",
+  "dependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "babel-loader": "^8.2.5",
+    "core-js": "^3.22.2",
+    "cors": "^2.8.5",
+    "css-loader": "^6.7.1",
+    "d3": "^7.4.4",
+    "mini-css-extract-plugin": "^2.6.0",
+    "regenerator-runtime": "^0.13.9",
+    "sass-loader": "^12.6.0",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "devDependencies": {
+    "sass": "^1.50.1"
+  }
+}
