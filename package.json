@@ -1,6 +1,7 @@
 {
   "name": "javascriptproject",
   "version": "1.0.0",
+  "type": "module",
   "description": "Navlinks: Portfolio Website: N/A Github: https://github.com/bphan002 LinkedIn: https://www.linkedin.com/in/billy-phan-41014a40/",
   "main": "index.js",
   "browserslist": [
