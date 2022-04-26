@@ -1,14 +1,14 @@
 import {select, scaleBand, scaleLinear, axisLeft, axisTop, axisBottom, scaleExtent } from "d3"
+import {render} from "./graph"
 
-const h1 = select('h1').style('color', 'green')
+const h1 = select('h1').style('ret.color', 'green')
 const fishProfileContainer = document.querySelector("[fish-profile-container]")
 const fishProfileTemplate = document.querySelector("[fish-profile-template]")
 const search = document.querySelector("[data-search]")
 const fishIcon = document.querySelector(".image-container")
-let fishAbundancy = {}
+const fishGraph = []
+
 let fishes; 
-
-
 
 document.addEventListener("DOMContentLoaded",()=> start()) //triggers whole start
 
@@ -42,68 +42,11 @@ async function start() {
         searchResult(fishes,value)
     })
  
-    const svg = select('svg')
-    const width = +svg.attr('width') //from index.html
-    const height = +svg.attr('height') // from index.html
-    // vertical bar chart
-    const render = data => {
-        var margin = {
-            top: 50,
-            right: 50,
-            bottom: 50,
-            left: 50
-        }
-        const graphWidth = width - margin.left - margin.right
-        const graphHeight = height - margin.top - margin.bottom
-
-        // console.log(data)
-        data = data.slice(0,20)
-        console.log("---",data)
-        const xScale = scaleBand()
-            // console.log(data.Protein)
-            // .domain([0,max(data, fish => fish.Sodium)])
-            .domain(data.map(fish => fish['Species Name']))
-            .range([0, graphWidth])
-            .padding(0.1)
-        // console.log(xScale.domain())
-
-
-        const yScale = scaleLinear()
-            .domain([0, 250])
-            .range([graphHeight, margin.bottom + margin.top])  //width of bars for bar chart
-        const g = svg.append('g') // group element
-            .attr('transform', `translate(${margin.left},${margin.top})`)
-
-        g.selectAll('rect').data(data)
-            .enter().append('rect')
-            .attr('x', fish => xScale(fish['Species Name']))
-            .attr('y', fish => yScale(fish['Calories']))
-            .attr('height', fish => graphHeight - yScale(fish['Calories']))
-            .style("fill", fish => fishAbundancy[fish['Species Name']].color)
-            .transition().duration(2000)
-            .delay((d, i) => i * .5)
-            .attr('width', xScale.bandwidth())
-        
-        g.append("g")
-        .attr("transform", `translate(0,${graphHeight})`)
-        .call(axisBottom(xScale))
-
-       g.selectAll("text")
-        .attr("transform", "translate(-12,-70)rotate(-90)")
-        .style("fill", "#fff")
-
-        const yAxis = axisLeft(yScale) //putting axes label
-        yAxis(g.append('g'))  // adds the left axis label
-    }
-  
     async function fetchfishes() {
         // const apiUrl = "https://www.fishwatch.gov/api/species"
         let restResponse = await fetch("https://www.fishwatch.gov/api/species")
         let data = await restResponse.json()
-        data.forEach(fish => {
-            fishObjectAdder(fish, fishAbundancy)
-        })
-        render(data) // for graph
+    
         // second function
         console.log(data)
         return data.map(createFish) // will give fish object
@@ -111,6 +54,7 @@ async function start() {
     }
     fishes = await fetchfishes()
     fishes.forEach(renderFish) //render fish with ids
+    render(fishes) // for graph
 }
 
 
@@ -122,52 +66,35 @@ function singleFishPage(fish) {
     const image = document.getElementById("single-fish-image")
     const location = document.getElementById('fish-location')
     const locationTitle = document.getElementById("fish-location-title")
-    name.innerHTML = fish.name
+    console.log("!!!")
+    console.log(container)
+    const button = container.querySelector('button')
+    console.log(button)
     
-
-    console.log(fish.description)
+    name.innerHTML = fish.name
     // fish.location ? locationTitle.innerHTML = "Location"
     locationTitle.innerHTML = fish.location ? "Location" : ""
     location.innerHTML = fish.location
     descriptionTitle.innerHTML = fish.description ? "Description" : ""
     description.innerHTML = fish.description
     image.src = fish.image
+    if (fish.selected) {
+        button.innerHTML = "Remove Fish from Graph"
+        button.classList.add("remove-graph")
+    } else {
+        button.innerHTML = "Add Fish to Graph"
+        button.classList.remove("remove-graph")
+    }
+    button.onclick = () => {
+        fish.selected = !fish.selected
+        render()
+    }
+
     changePage("single-fish")
 }
 
 function fishObjectAdder(fish) {
-    let populationSentence = fish.Population
-    // console.log(populationSentence)
-    let name = fish['Species Name']
-    let status;
-    let color;
-
-    if (populationSentence === null) {
-        status = "unknown"
-        color = "black"
-    } else if (populationSentence.toLowerCase().includes("significantly below")) {
-        status = "significantly below"
-        color = "red"
-    } else if (populationSentence.toLowerCase().includes("significantly above")) {
-        status = "significantly above"
-        color = "green"
-    } else if (populationSentence.toLowerCase().includes("above")) {
-        status = 'above'
-        color = "lightgreen"
-    } else if (populationSentence.toLowerCase().includes("below")) {
-        status = "below"
-        color = "orange"
-    } else if (populationSentence.toLowerCase().includes("unknown")) {
-        status = "unknown"
-        color = "black"
-    } else if (populationSentence.toLowerCase().includes("near target level")) {
-        status = "near target level"
-        color = "pink"
-    } else {
-        console.log(populationSentence)
-    }
-
-    fishAbundancy[name] = {status,color}
+   
 }
 
 
@@ -192,6 +119,36 @@ function createFish(fish) {
     ret.name = fish["Species Name"]
     ret.description = fish["Physical Description"]
     ret.location = fish["Location"]
+    ret.selected = false
+    ret.calories = fish['Calories']
+
+    let populationSentence = fish.Population
+    // console.log(populationSentence)
+    if (populationSentence === null) {
+        ret.status = "unknown"
+        ret.color = "black"
+    } else if (populationSentence.toLowerCase().includes("significantly below")) {
+        ret.status = "significantly below"
+        ret.color = "red"
+    } else if (populationSentence.toLowerCase().includes("significantly above")) {
+        ret.status = "significantly above"
+        ret.color = "green"
+    } else if (populationSentence.toLowerCase().includes("above")) {
+        ret.status = 'above'
+        ret.color = "lightgreen"
+    } else if (populationSentence.toLowerCase().includes("below")) {
+        ret.status = "below"
+        ret.color = "orange"
+    } else if (populationSentence.toLowerCase().includes("unknown")) {
+        ret.status = "unknown"
+        ret.color = "black"
+    } else if (populationSentence.toLowerCase().includes("near target level")) {
+        ret.status = "near target level"
+        ret.color = "pink"
+    } else {
+        console.log(populationSentence)
+    }
+
     return ret
 }
 
