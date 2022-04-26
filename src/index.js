@@ -1,12 +1,10 @@
-import {select, scaleBand, scaleLinear, axisLeft, axisTop, axisBottom, scaleExtent } from "d3"
 import {render} from "./graph"
 
-const h1 = select('h1').style('ret.color', 'green')
 const fishProfileContainer = document.querySelector("[fish-profile-container]")
 const fishProfileTemplate = document.querySelector("[fish-profile-template]")
 const search = document.querySelector("[data-search]")
 const fishIcon = document.querySelector(".image-container")
-const fishGraph = []
+let fishGraph = []
 
 let fishes; 
 
@@ -59,6 +57,7 @@ async function start() {
 
 
 function singleFishPage(fish) {
+    console.log('hi')
     const container = document.getElementById("single-fish")
     const name = document.getElementById("fish-name")
     const descriptionTitle = document.getElementById("fish-description-title")
@@ -78,25 +77,34 @@ function singleFishPage(fish) {
     descriptionTitle.innerHTML = fish.description ? "Description" : ""
     description.innerHTML = fish.description
     image.src = fish.image
-    if (fish.selected) {
-        button.innerHTML = "Remove Fish from Graph"
-        button.classList.add("remove-graph")
-    } else {
-        button.innerHTML = "Add Fish to Graph"
-        button.classList.remove("remove-graph")
-    }
-    button.onclick = () => {
+    applyButtontext(fish,button)
+
+    button.onclick = () => {   
         fish.selected = !fish.selected
-        render()
+        if (fish.selected) {
+            fishGraph.push(fish)
+        } else {
+            fishGraph = fishGraph.filter((ele) => {
+                return ele !== fish 
+            })
+        }
+        applyButtontext(fish,button)
+        render(fishGraph)
+    }
+
+    function applyButtontext(fish,button) {
+        if (fish.selected) {
+            button.innerHTML = "Remove Fish from Graph"
+            button.classList.add("remove-graph")
+        } else {
+            button.innerHTML = "Add Fish to Graph"
+            button.classList.remove("remove-graph")
+        }
+        
     }
 
     changePage("single-fish")
 }
-
-function fishObjectAdder(fish) {
-   
-}
-
 
 function renderFish(fish,index) { //index is used for the html so we can figure out what fish it is when we click on it
     const profile = fishProfileTemplate.content.cloneNode(true).children[0]
