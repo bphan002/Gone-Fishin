@@ -17,41 +17,35 @@
         </div>
     </header>
 
-    <main>
-        <nav>
-            <a data-page= "search" href="#">Search</a>
-            <a data-page= "graph" href="#">Graph</a>
-        </nav>
+    <nav>
+        <a data-page= "fish-profiles" href="#">Search</a>
+        <a data-page= "graph" href="#">Graph</a>
+    </nav>
 
-        <main>
-            <div class="svg-container">
+    <main>
+            <div class="svg-container invisible" data-page="graph">
+                <div id="calories"></div>
                 <svg width="1000" height="1000"></svg>
             </div>
-            <div id="image-container" class="visible"></div>
-            <!-- <div class = "image-container visible"></div> -->
             
-
-
-            
-            <div class ="fish-profiles" fish-profile-container>
+            <div class ="fish-profiles visible" fish-profile-container data-page="fish-profiles">
                 <template fish-profile-template>
                     <div class="profile">
-                        <div class="fish-name" data-SpeciesName></div>
-                        <div class="fish-description" data-physicalDescription></div>
-                        <div class="fish-image" data-image></div> 
+                        <div class="center">
+                            <h3></h3>
+                        </div>
+                        <img src="" alt=""> 
                     </div>
                 </template>
             </div>
-            
-        </main>
 
-        <div id="single-fish">
+        <div class="invisible" id="single-fish" data-page="single-fish">
             <img id="single-fish-image"></img>
             <div id="fish-info-container">
                 <div id="fish-name"></div>
                 <h2 id="fish-location-title"></h2>
                 <div id="fish-location"></div>
-                <h2>Description</h2>
+                <h2 id="fish-description-title">Description</h2>
                 <div id="fish-description"></div>
             </div>
         </div>

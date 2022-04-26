@@ -30,23 +30,22 @@ body {
   /* background-image: url("/src/image/background.jpg"); */
 }
 
-#image-container {
+.fish-profiles {
   /* .image-container { */
-  display: none;
   justify-content: flex-start;
   flex-wrap: wrap;
   position: relative;
 }
 
-#image-container img {
+.fish-profiles img {
   /* .image-container img { */
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   /* border: solid #5B6DCD 10px; */
   transition: 0.5s;
 }
 
-#image-container img:hover {
+.fish-profiles img:hover {
   /* .image-container img:hover {  */
   transform: scale(1.15);
   box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
@@ -54,23 +53,42 @@ body {
   cursor: pointer;
 }
 
-.fish-profiles, .svg-container {
-  display: none;
-}
-
-#single-fish {
-  position: fixed;
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
   top: 0px;
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background: white;
-  display: none;
+  z-index: 10;
+}
+
+.profile {
+  position: relative;
+}
+
+.profile h3 {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.5s;
+  text-align: center;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.profile:hover h3 {
+  opacity: 1;
 }
 
 .visible {
-  display: flex !important;
+  display: flex;
   z-index: 999;
+}
+
+.invisible {
+  display: none;
 }
 
 #single-fish-info-container {

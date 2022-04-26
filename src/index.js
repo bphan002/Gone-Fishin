@@ -1,61 +1,23 @@
-import {select, scaleBand, scaleLinear, axisLeft, axisTop, scaleExtent } from "d3"
+import {select, scaleBand, scaleLinear, axisLeft, axisTop, axisBottom, scaleExtent } from "d3"
 
 const h1 = select('h1').style('color', 'green')
 const fishProfileContainer = document.querySelector("[fish-profile-container]")
 const fishProfileTemplate = document.querySelector("[fish-profile-template]")
 const search = document.querySelector("[data-search]")
-const fishIcon = document.getElementById("image-container")
+const fishIcon = document.querySelector(".image-container")
+let fishAbundancy = {}
 let fishes; 
 
-//goes throughn nav tags and add an event listener to it
-function navFinder() {
-    const nav = document.querySelectorAll('nav a')
-    nav.forEach((link)=> {
-        // console.log(link)
-        link.addEventListener('click', () => {
-            if (link.dataset.page === "search") {
-                console.log(link)
-                setPageSearch()
-            } else if (link.dataset.page === "graph")  {
-                // console.log(link)
-                setPageGraph()
-            }
-        })
-    })
-
-    function setPageSearch() {
-       console.log(document.querySelector('#image-container'))
-        document.querySelector('#image-container').className =  'visible'
-        // document.querySelector('.image-container').className ='image-container visible'
-        document.querySelector('.svg-container').className = 'svg-container'
-    }
-
-
-    function setPageGraph() {
-        console.log(document.querySelector('#image-container'))
-        // console.log(document.querySelector('.image-container'))
-        document.querySelector('#image-container').className = ''
-        // document.querySelector('.image-container').className = 'image-container'
-        document.querySelector('.svg-container').className = 'svg-container visible'
-    }
-
-}
-
-
-
-//create a single fish where it'll display on the page and it'll be invisisble
-//then set it to visible
 
 
 document.addEventListener("DOMContentLoaded",()=> start()) //triggers whole start
 
 async function start() {
      //this is for the search bar filter.  It'll store the filtered fish in an array
-    let fishes = []
 
     //this grabs a key/value pair of the fish and how abundant it is 
-    let fishAbundancy = {}
-    navFinder()
+
+    addLinks()
     //when browser has finish loading....
     //fires when everything is ready when DOM is ready
     //safeguard between trying to access element before domtree has fully loaded
@@ -65,8 +27,9 @@ async function start() {
 
     //i want this to listen to a clicked iimage once it is clicked the detailed
     //function will run to change the page to the specific fish deatils 
-    fishIcon.addEventListener("click", (e) => {
-        const fish = e.target
+    fishProfileContainer.addEventListener("click", (e) => {
+        const fish = e.target.parentNode
+        console.log(fish)
         const id = fish.dataset['id']
         singleFishPage(fishes[id]) //grabs whole fishes array
     });
@@ -76,10 +39,7 @@ async function start() {
     search.addEventListener("input", e => {
         const value = e.target.value.toLowerCase()
         // console.log(fishes)
-        fishes.forEach(fish => {
-            const isVisible = fish.name.toLowerCase().includes(value)
-            fish.element.classList.toggle("hide", !isVisible)
-        })
+        searchResult(fishes,value)
     })
  
     const svg = select('svg')
@@ -97,6 +57,8 @@ async function start() {
         const graphHeight = height - margin.top - margin.bottom
 
         // console.log(data)
+        data = data.slice(0,20)
+        console.log("---",data)
         const xScale = scaleBand()
             // console.log(data.Protein)
             // .domain([0,max(data, fish => fish.Sodium)])
@@ -111,23 +73,29 @@ async function start() {
             .range([graphHeight, margin.bottom + margin.top])  //width of bars for bar chart
         const g = svg.append('g') // group element
             .attr('transform', `translate(${margin.left},${margin.top})`)
-        
-            const yAxis = axisLeft(yScale) //putting axes label
-        yAxis(g.append('g'))  // adds the left axis label
-        
-        const xAxis = axisTop(xScale)
-        xAxis(g.append('g'))
 
         g.selectAll('rect').data(data)
             .enter().append('rect')
             .attr('x', fish => xScale(fish['Species Name']))
-            .attr('y', fish => height - yScale(fish['Calories']))
-            .attr('height', fish => yScale(fish['Calories']))
+            .attr('y', fish => yScale(fish['Calories']))
+            .attr('height', fish => graphHeight - yScale(fish['Calories']))
+            .style("fill", fish => fishAbundancy[fish['Species Name']].color)
             .transition().duration(2000)
             .delay((d, i) => i * .5)
             .attr('width', xScale.bandwidth())
-    }
+        
+        g.append("g")
+        .attr("transform", `translate(0,${graphHeight})`)
+        .call(axisBottom(xScale))
 
+       g.selectAll("text")
+        .attr("transform", "translate(-12,-70)rotate(-90)")
+        .style("fill", "#fff")
+
+        const yAxis = axisLeft(yScale) //putting axes label
+        yAxis(g.append('g'))  // adds the left axis label
+    }
+  
     async function fetchfishes() {
         // const apiUrl = "https://www.fishwatch.gov/api/species"
         let restResponse = await fetch("https://www.fishwatch.gov/api/species")
@@ -149,62 +117,68 @@ async function start() {
 function singleFishPage(fish) {
     const container = document.getElementById("single-fish")
     const name = document.getElementById("fish-name")
+    const descriptionTitle = document.getElementById("fish-description-title")
     const description = document.getElementById("fish-description")
     const image = document.getElementById("single-fish-image")
     const location = document.getElementById('fish-location')
     const locationTitle = document.getElementById("fish-location-title")
     name.innerHTML = fish.name
-    location.innerHTML = fish.location
+    
 
+    console.log(fish.description)
     // fish.location ? locationTitle.innerHTML = "Location"
     locationTitle.innerHTML = fish.location ? "Location" : ""
+    location.innerHTML = fish.location
+    descriptionTitle.innerHTML = fish.description ? "Description" : ""
+    description.innerHTML = fish.description
     image.src = fish.image
-    container.className = "visible"
+    changePage("single-fish")
 }
 
-
-
-function fishObjectAdder(fish, fishAbundancy) {
+function fishObjectAdder(fish) {
     let populationSentence = fish.Population
     // console.log(populationSentence)
     let name = fish['Species Name']
     let status;
+    let color;
 
     if (populationSentence === null) {
         status = "unknown"
+        color = "black"
     } else if (populationSentence.toLowerCase().includes("significantly below")) {
         status = "significantly below"
+        color = "red"
     } else if (populationSentence.toLowerCase().includes("significantly above")) {
         status = "significantly above"
+        color = "green"
     } else if (populationSentence.toLowerCase().includes("above")) {
         status = 'above'
+        color = "lightgreen"
     } else if (populationSentence.toLowerCase().includes("below")) {
         status = "below"
+        color = "orange"
     } else if (populationSentence.toLowerCase().includes("unknown")) {
         status = "unknown"
-    } else if (populationSentence.toLowerCase().includes("near target level"))
+        color = "black"
+    } else if (populationSentence.toLowerCase().includes("near target level")) {
         status = "near target level"
-    else {
+        color = "pink"
+    } else {
         console.log(populationSentence)
     }
 
-    fishAbundancy[name] ||= ''
-    fishAbundancy[name] = status
+    fishAbundancy[name] = {status,color}
 }
 
 
 function renderFish(fish,index) { //index is used for the html so we can figure out what fish it is when we click on it
     const profile = fishProfileTemplate.content.cloneNode(true).children[0]
-    const name = profile.querySelector("[data-SpeciesName]")
-    const description = profile.querySelector("[data-physicalDescription]")
-    const fishImage = profile.querySelector("[data-image]")
-
+    const name = profile.querySelector("h3")
+    const image = profile.querySelector("img")
+    image.src = fish.image
     name.innerHTML = fish.name
-    description.innerHTML = fish.description
-    // console.log(fishImageAPI)
-    fishIcon.insertAdjacentHTML('beforeEnd', `<img data-id="${index}" src=${fish.image}>`)
     fishProfileContainer.append(profile)
-    return { name: fish["Species Name"], element: profile }
+    profile.dataset.id = index
 }
 
 //will take fish object
@@ -221,3 +195,45 @@ function createFish(fish) {
     return ret
 }
 
+function searchResult(fishes,value){
+    const fishEle= document.querySelectorAll("[data-id]")
+    fishEle.forEach(ele => {
+        let index = ele.dataset.id
+        const isVisible =fishes[index].name.toLowerCase().includes(value)
+        ele.classList.toggle("hide", !isVisible)
+    })
+}
+
+//find all of the nav items that have data attribute data-page
+// go through all elements in main that have that tag and create a list
+//add event listenrs to each of those
+// loop through all of the elements prev stored and hide them unless data matches
+
+function getPageConfig(){
+    return {
+        links:document.querySelectorAll("nav [data-page]"),
+        pages:document.querySelectorAll("main [data-page]")
+    }
+}
+
+function addLinks() {
+    const config = getPageConfig()
+    config.links.forEach(link => {
+        link.addEventListener('click',()=>{
+            changePage(link.dataset.page)
+        })
+    })
+} 
+
+function changePage(targetPage){
+    const config = getPageConfig()
+    config.pages.forEach(page => {
+        if (page.dataset.page === targetPage) {
+                page.classList.remove('invisible')
+                page.classList.add('visible')
+        } else {
+                page.classList.add('invisible')
+                page.classList.remove('visible')
+        }
+    })
+}
