@@ -1,57 +1,41 @@
-// import { select } from "d3" //not working for some reason
+import {select, scaleBand, scaleLinear, axisLeft, axisTop, scaleExtent } from "d3"
 
+const h1 = select('h1').style('color', 'green')
 const fishProfileContainer = document.querySelector("[fish-profile-container]")
 const fishProfileTemplate = document.querySelector("[fish-profile-template]")
 const search = document.querySelector("[data-search]")
-const circleFish = document.getElementById("image-container")
+const fishIcon = document.getElementById("image-container")
 let fishes; 
 
 //goes throughn nav tags and add an event listener to it
 function navFinder() {
     const nav = document.querySelectorAll('nav a')
     nav.forEach((link)=> {
-        console.log(link)
+        // console.log(link)
         link.addEventListener('click', () => {
             if (link.dataset.page === "search") {
                 console.log(link)
                 setPageSearch()
             } else if (link.dataset.page === "graph")  {
-                console.log(link)
+                // console.log(link)
                 setPageGraph()
             }
         })
     })
 
-
-    // function singleFishPage(fish) {
-    //     const container = document.getElementById("single-fish")
-    //     const name = document.getElementById("fish-name")
-    //     const description = document.getElementById("fish-description")
-    //     const image = document.getElementById("fish-image")
-    //     name.innerHTML = fish.name
-    //     description.innerHTML = fish.description
-    //     image.src = fish.image
-    //     container.className = "visible"
-    //     console.log(container)
-    // }
-
-//     <div class="svg-container">
-//     <svg width="1000" height="1000"></svg>
-//     <div id="image-container"></div>
-// </div>
-
-// <div class ="fish-profiles" fish-profile-container>
-
     function setPageSearch() {
-       console.log(document.querySelector('.image-container'))
+       console.log(document.querySelector('#image-container'))
         document.querySelector('#image-container').className =  'visible'
+        // document.querySelector('.image-container').className ='image-container visible'
         document.querySelector('.svg-container').className = 'svg-container'
     }
 
 
     function setPageGraph() {
-        console.log(document.querySelector('.image-container'))
+        console.log(document.querySelector('#image-container'))
+        // console.log(document.querySelector('.image-container'))
         document.querySelector('#image-container').className = ''
+        // document.querySelector('.image-container').className = 'image-container'
         document.querySelector('.svg-container').className = 'svg-container visible'
     }
 
@@ -63,9 +47,14 @@ function navFinder() {
 //then set it to visible
 
 
-document.addEventListener("DOMContentLoaded",()=> start())
+document.addEventListener("DOMContentLoaded",()=> start()) //triggers whole start
 
 async function start() {
+     //this is for the search bar filter.  It'll store the filtered fish in an array
+    let fishes = []
+
+    //this grabs a key/value pair of the fish and how abundant it is 
+    let fishAbundancy = {}
     navFinder()
     //when browser has finish loading....
     //fires when everything is ready when DOM is ready
@@ -76,25 +65,14 @@ async function start() {
 
     //i want this to listen to a clicked iimage once it is clicked the detailed
     //function will run to change the page to the specific fish deatils 
-    circleFish.addEventListener("click", (e) => {
-        let item = e.target
-        let id= item.dataset['id']
-        singleFishPage(fishes[id]) //grabs whole fishes function 
-    
+    fishIcon.addEventListener("click", (e) => {
+        const fish = e.target
+        const id = fish.dataset['id']
+        singleFishPage(fishes[id]) //grabs whole fishes array
     });
 
-    const svg = d3.select('svg')
 
-    const width = +svg.attr('width') //from index.html
-    const height = +svg.attr('height') // from index.html
-
-
-
-    //this is for the search bar filter.  It'll store the filtered fish in an array
-    let fishes = []
-
-    let fishAbundancy = {}
-
+    //this is for searchbar
     search.addEventListener("input", e => {
         const value = e.target.value.toLowerCase()
         // console.log(fishes)
@@ -103,12 +81,10 @@ async function start() {
             fish.element.classList.toggle("hide", !isVisible)
         })
     })
-    // console.log(fishes)
-    //test csv
-    // d3.csv('data.csv').then(name => {
-    //     render(name)
-    // })
-
+ 
+    const svg = select('svg')
+    const width = +svg.attr('width') //from index.html
+    const height = +svg.attr('height') // from index.html
     // vertical bar chart
     const render = data => {
         var margin = {
@@ -121,45 +97,36 @@ async function start() {
         const graphHeight = height - margin.top - margin.bottom
 
         // console.log(data)
-        const xScale = d3.scaleBand()
+        const xScale = scaleBand()
             // console.log(data.Protein)
-            // .domain([0,d3.max(data, fish => fish.Sodium)])
+            // .domain([0,max(data, fish => fish.Sodium)])
             .domain(data.map(fish => fish['Species Name']))
             .range([0, graphWidth])
             .padding(0.1)
         // console.log(xScale.domain())
 
 
-        const yScale = d3.scaleLinear()
+        const yScale = scaleLinear()
             .domain([0, 250])
-            // .domain([0, )
             .range([graphHeight, margin.bottom + margin.top])  //width of bars for bar chart
-
-        // const grp = svg.append('grp')
-        //     .attr('transform',translate(margin.top:20, margin.top)
         const g = svg.append('g') // group element
             .attr('transform', `translate(${margin.left},${margin.top})`)
-
-        const yAxis = d3.axisLeft(yScale) //putting axes label
+        
+            const yAxis = axisLeft(yScale) //putting axes label
         yAxis(g.append('g'))  // adds the left axis label
-
-        const xAxis = d3.axisTop(xScale)
+        
+        const xAxis = axisTop(xScale)
         xAxis(g.append('g'))
 
-        // console.log(xScale.domain())
         g.selectAll('rect').data(data)
-            .enter().append('rect')  //.enter is on the entered selection we want to append
+            .enter().append('rect')
             .attr('x', fish => xScale(fish['Species Name']))
-            // .attr('y', fish => yScale(fish['Calories']))
             .attr('y', fish => height - yScale(fish['Calories']))
             .attr('height', fish => yScale(fish['Calories']))
-            // console.log(svg.width)
-            // .attr('width', 300)
             .transition().duration(2000)
             .delay((d, i) => i * .5)
             .attr('width', xScale.bandwidth())
     }
-
 
     async function fetchfishes() {
         // const apiUrl = "https://www.fishwatch.gov/api/species"
@@ -168,14 +135,31 @@ async function start() {
         data.forEach(fish => {
             fishObjectAdder(fish, fishAbundancy)
         })
-        render(data)
-        //second function
-        // console.log(data)
+        render(data) // for graph
+        // second function
+        console.log(data)
         return data.map(createFish) // will give fish object
         // console.log(fish)
     }
     fishes = await fetchfishes()
-    fishes.forEach(renderFish)
+    fishes.forEach(renderFish) //render fish with ids
+}
+
+
+function singleFishPage(fish) {
+    const container = document.getElementById("single-fish")
+    const name = document.getElementById("fish-name")
+    const description = document.getElementById("fish-description")
+    const image = document.getElementById("single-fish-image")
+    const location = document.getElementById('fish-location')
+    const locationTitle = document.getElementById("fish-location-title")
+    name.innerHTML = fish.name
+    location.innerHTML = fish.location
+
+    // fish.location ? locationTitle.innerHTML = "Location"
+    locationTitle.innerHTML = fish.location ? "Location" : ""
+    image.src = fish.image
+    container.className = "visible"
 }
 
 
@@ -206,9 +190,6 @@ function fishObjectAdder(fish, fishAbundancy) {
 
     fishAbundancy[name] ||= ''
     fishAbundancy[name] = status
-    // 
-
-
 }
 
 
@@ -221,27 +202,13 @@ function renderFish(fish,index) { //index is used for the html so we can figure 
     name.innerHTML = fish.name
     description.innerHTML = fish.description
     // console.log(fishImageAPI)
-    circleFish.insertAdjacentHTML('beforeEnd', `<img data-id="${index}" src=${fish.image}>`)
+    fishIcon.insertAdjacentHTML('beforeEnd', `<img data-id="${index}" src=${fish.image}>`)
     fishProfileContainer.append(profile)
     return { name: fish["Species Name"], element: profile }
 }
 
 //will take fish object
 //will work with a single copy versus our other render fish function
-function singleFishPage(fish) {
-    const container = document.getElementById("single-fish")
-    const name = document.getElementById("fish-name")
-    const description = document.getElementById("fish-description")
-    const image = document.getElementById("fish-image")
-    name.innerHTML = fish.name
-    description.innerHTML = fish.description
-    image.src = fish.image
-    container.className = "visible"
-    console.log(container)
-}
-
-
-
 
 function createFish(fish) {
     let ret = {} //return
@@ -250,7 +217,7 @@ function createFish(fish) {
         : (fish['Image Gallery']['src'] === undefined ? fish['Image Gallery'][0]['src'] : fish['Image Gallery']['src'])
     ret.name = fish["Species Name"]
     ret.description = fish["Physical Description"]
+    ret.location = fish["Location"]
     return ret
-  
 }
 

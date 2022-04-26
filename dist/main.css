@@ -1,3 +1,93 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
+main {
+  display: flex;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  border-style: solid;
+  border-color: red;
+}
+
+nav {
+  border-style: solid;
+  border-color: green;
+  padding: 25px;
+}
+nav a {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+body {
+  /* background-image: url("/src/image/background.jpg"); */
+}
+
+#image-container {
+  /* .image-container { */
+  display: none;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+#image-container img {
+  /* .image-container img { */
+  width: 100px;
+  height: 100px;
+  /* border: solid #5B6DCD 10px; */
+  transition: 0.5s;
+}
+
+#image-container img:hover {
+  /* .image-container img:hover {  */
+  transform: scale(1.15);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+  filter: brightness(125%);
+  cursor: pointer;
+}
+
+.fish-profiles, .svg-container {
+  display: none;
+}
+
+#single-fish {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: white;
+  display: none;
+}
+
+.visible {
+  display: flex !important;
+  z-index: 999;
+}
+
+#single-fish-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#fish-name {
+  font-size: 50px;
+  margin-left: 20px;
+}
+
+#fish-location li, #fish-description li {
+  list-style-type: none;
+}
+
+h2 {
+  margin-left: 25px;
+}

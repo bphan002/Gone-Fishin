@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./src/index.css"/>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
- 
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./dist/main.css"/> 
     <!-- <script src="./dist/main.js"></script> -->
     <title>Gone Fishin</title>
 </head>
@@ -17,38 +16,46 @@
             <input type="search" id="search" data-search>
         </div>
     </header>
-    
-    <nav>
-        <a data-page= "search" href="#">Search</a>
-        <a data-page= "graph" href="#">Graph</a>
-    </nav>
 
     <main>
-        <div class="svg-container">
-            <svg width="1000" height="1000"></svg>
-        </div>
-        <div id="image-container" class="visible"></div>
-        
+        <nav>
+            <a data-page= "search" href="#">Search</a>
+            <a data-page= "graph" href="#">Graph</a>
+        </nav>
+
+        <main>
+            <div class="svg-container">
+                <svg width="1000" height="1000"></svg>
+            </div>
+            <div id="image-container" class="visible"></div>
+            <!-- <div class = "image-container visible"></div> -->
+            
 
 
-        <div class ="fish-profiles" fish-profile-container>
-            <template fish-profile-template>
-                <div class="profile">
-                    <div class="fish-name" data-SpeciesName></div>
-                    <div class="fish-description" data-physicalDescription></div>
-                    <div class="fish-image" data-image></div> 
-                </div>
-            </template>
+            
+            <div class ="fish-profiles" fish-profile-container>
+                <template fish-profile-template>
+                    <div class="profile">
+                        <div class="fish-name" data-SpeciesName></div>
+                        <div class="fish-description" data-physicalDescription></div>
+                        <div class="fish-image" data-image></div> 
+                    </div>
+                </template>
+            </div>
+            
+        </main>
+
+        <div id="single-fish">
+            <img id="single-fish-image"></img>
+            <div id="fish-info-container">
+                <div id="fish-name"></div>
+                <h2 id="fish-location-title"></h2>
+                <div id="fish-location"></div>
+                <h2>Description</h2>
+                <div id="fish-description"></div>
+            </div>
         </div>
-        
     </main>
-
-    <div id="single-fish">
-        <div id="fish-name"></div>
-        <img id="fish-image"></img>
-        <div id="fish-description"></div>
-    </div>
-    
-    <script src="src/index.js"></script>
+    <script src="dist/main.js"></script>
 </body>
 </html>
