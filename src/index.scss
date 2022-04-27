@@ -89,10 +89,6 @@ body {
 }
 
 
-
-
-
-
 .center {
   display: flex;
   justify-content: center;
@@ -153,16 +149,15 @@ body {
 
 
 
-#single-fish-image {
-  width: 1000px;
-  height: 1000px;
-  max-height: 100%;
-  max-width: 100%;
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;;
   background-color: white;
   padding: 20px;
   align-items: center;
   justify-content: center;
-  flex-shrink: 1;
+
 }
 
 // #single-fish-info-container {
@@ -176,13 +171,11 @@ body {
 
 #fish-info-container {
   margin-left: 30px;
-  width: 1000px;
-  height: 1000px;
+
   padding: 30px;
   border: white solid 20px;
   padding: 20px;
   background-color: lightblue;
-  flex-shrink: 1;
 }
 
 
@@ -227,9 +220,7 @@ h2 {
     }
   }
 
-  
 
-  
 
   .sigabove {
     color: rgb(0,100,0)
