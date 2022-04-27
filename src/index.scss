@@ -18,28 +18,23 @@ header {
     justify-content: center;
     align-items: center;
 
-    
+
     input[type=search] {
       margin: 10px;
       text-align: center;
       border-radius: 60%;
-      background-color: rgb(193,228,242);
+      background-color: rgb(193, 228, 242);
       padding: 30px;
       border: 5px solid white;
     }
   }
-  
+
 
   img {
     max-height: 80px;
     fill: white;
   }
 }
-
-
-
-
-
 
 
 nav {
@@ -145,6 +140,10 @@ body {
   align-content: center;
   padding: 30px;
   border: green;
+
+  img {
+    width: 100%;
+  }
 }
 
 
@@ -152,12 +151,13 @@ body {
 .image-container {
   display: flex;
   align-items: center;
-  justify-content: center;;
+  justify-content: center;
+  ;
   background-color: white;
   padding: 20px;
   align-items: center;
   justify-content: center;
-
+  width: 50%
 }
 
 // #single-fish-info-container {
@@ -176,6 +176,7 @@ body {
   border: white solid 20px;
   padding: 20px;
   background-color: lightblue;
+  width: 50%
 }
 
 
@@ -209,65 +210,44 @@ h2 {
   background-color: white;
   margin-top: 30px;
   padding-right: 200px;
-  border: 4px solid black; 
+  border: 4px solid black;
 
-  li {
-    font-size : 25px;
-    list-style: square;
-    marker: {
-      font-size: 100px;
-      font-weight: bolder;
-    }
-  }
-
-
-
-  .sigabove {
-    color: rgb(0,100,0)
-  }
-  .above {
-  //   position: absolute;
-  //   border: 3px solid red;
-  //   display: inline;
-  //   font-size: 16px;
-  //   left: 700px;
-  //   padding-right: 300px;
-
-
-  }
-  .sigbelow {
-  //   position: absolute;
-  //   border: 3px solid red;
-  //   display: inline;
-  //   font-size: 16px;
-  //   left: 700px;
-  color: red;
-  }
-  // .below {
-  //   position: absolute;
-  //   border: 3px solid red;
-  //   display: inline;
-  //   font-size: 16px;
-  //   left: 700px;
-  //   padding-top: 75px;
-  // }
-  // .near {
-  //   position: absolute;
-  //   border: 3px solid red;
-  //   display: inline;
-  //   font-size: 16px;
-  //   padding-top: 100px;
-  // }
-  // .unknown {
-  //   position: absolute;
-  //   border: 3px solid red;
-  //   display: inline;
-  //   font-size: 16px;
-  //   left: 700px;
-  //   padding-top: 125px;
-  // }
 
 }
+
+.legend-row {
+  display: flex;
+}
+
+.legend-box {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}
+
+// .below {
+//   position: absolute;
+//   border: 3px solid red;
+//   display: inline;
+//   font-size: 16px;
+//   left: 700px;
+//   padding-top: 75px;
+// }
+// .near {
+//   position: absolute;
+//   border: 3px solid red;
+//   display: inline;
+//   font-size: 16px;
+//   padding-top: 100px;
+// }
+// .unknown {
+//   position: absolute;
+//   border: 3px solid red;
+//   display: inline;
+//   font-size: 16px;
+//   left: 700px;
+//   padding-top: 125px;
+// }
 
 
 
@@ -284,3 +264,11 @@ button {
   background-color: white;
 }
 
+
+.tick line {
+  display:none;
+}
+
+.domain {
+  dipslay: none;
+}

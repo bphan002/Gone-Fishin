@@ -14,7 +14,7 @@ export function render(data) {
     var margin = {
         top: 15,
         right: 50,
-        bottom: 80,
+        bottom: 250,
         left: 200
     }
     const graphWidth = width - margin.left - margin.right
@@ -59,12 +59,15 @@ export function render(data) {
         
 
     let rotation = -90
+    let anchor = "end"
     if (data.length < 5) {
         rotation = 0
+        anchor = "middle"
     }
     g.selectAll("text")
-        .attr("transform", `translate(-12,${-110 +data.length})rotate(${rotation})`)
-        .style("fill", "#fff")
+        .attr("transform", `translate(-12,10)rotate(${rotation})`)
+        .attr("text-anchor", anchor )
+        .style("fill", "black")
         .style("font-size", 36 - data.length)
 
     const yAxis = axisLeft(yScale) //putting axes label
@@ -84,8 +87,8 @@ export function render(data) {
     svg.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
-    .attr("y", graphHeight+70)
-    .attr("x", (graphWidth + margin.left + margin.bottom +300)/2)
+    .attr("y", graphHeight + margin.bottom)
+    .attr("x", margin.right + (width/2))
     .style("font-size", "35px")
     // .attr('transform', "translate('600÷','600')")
     // .attr("transform", "rotate(180)")
