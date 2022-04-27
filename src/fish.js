@@ -1,5 +1,7 @@
 const fishProfileContainer = document.getElementById("fish-profile-container")
 
+let fishToGraph = []
+
 export function createFish(fish) {
     let fishObj = {}
     fishObj.image = fish["Species Illustration Photo"].src
@@ -10,7 +12,7 @@ export function createFish(fish) {
     fishObj.calories = fish['Calories']
 
     let populationSentence = fish.Population
-    // console.log(populationSentence)
+    // console.log(populationSegntence)
     if (populationSentence === null) {
         fishObj.status = "unknown"
         fishObj.color = "black"
@@ -39,7 +41,7 @@ export function createFish(fish) {
     return fishObj
 }
 
-export function updateFishProfile(fish) {
+export function updateFishProfile(fish,updateGraph) {
     const container = document.getElementById("single-fish")
     const name = document.getElementById("fish-name")
     const descriptionTitle = document.getElementById("fish-description-title")
@@ -48,6 +50,7 @@ export function updateFishProfile(fish) {
     const location = document.getElementById('fish-location')
     const locationTitle = document.getElementById("fish-location-title")
     const button = container.querySelector('button')
+
 
     name.innerHTML = fish.name
     locationTitle.innerHTML = fish.location ? "Location" : ""
@@ -67,10 +70,8 @@ export function updateFishProfile(fish) {
             })
         }
         applyButtontext(fish, button)
-        graph(fishToGraph)
+        updateGraph(fishToGraph)
     }
-
-    changePage("single-fish")
 
     function applyButtontext(fish, button) {
         if (fish.selected) {
@@ -95,11 +96,12 @@ export function addFishIcon(fish, index) {
     profile.dataset.id = index
 }
 
-export function fishIconWatch(allFish) {
+export function fishIconWatch(allFish,changePage,updateGraph) {
     fishProfileContainer.addEventListener("click", (e) => {
         const fish = e.target.parentNode
         const id = fish.dataset['id']
-        updateFishProfile(allFish[id]) 
+        updateFishProfile(allFish[id], updateGraph) 
+        changePage("single-fish")
     })
 } 
 

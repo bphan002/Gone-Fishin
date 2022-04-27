@@ -2,7 +2,7 @@ import { graph } from "./graph"
 import { createFish, updateFishProfile, addFishIcon, fishIconWatch} from "./fish"
 
 
-let fishToGraph = []
+
 let allFish = []
 
 document.addEventListener("DOMContentLoaded", () => start())
@@ -28,7 +28,7 @@ async function start() {
     allFish = await fetchFishes()
     allFish.forEach(addFishIcon)
     graph(allFish) //sample graph
-    fishIconWatch(allFish)
+    fishIconWatch(allFish,changePage,graph)
 }
 
 
