@@ -51,6 +51,7 @@ async function start() {
         // console.log(fish)
     }
     fishes = await fetchfishes()
+    fishes = fishes.filter(fish => fish.image)
     fishes.forEach(renderFish) //render fish with ids
     render(fishes) // for graph
 }
@@ -116,9 +117,7 @@ function renderFish(fish,index) { //index is used for the html so we can figure 
 
 function createFish(fish) {
     let ret = {} //return
-    ret.image = fish['Image Gallery'] === null
-        ? 'src/image/noFish.jpeg'
-        : (fish['Image Gallery']['src'] === undefined ? fish['Image Gallery'][0]['src'] : fish['Image Gallery']['src'])
+    ret.image = fish["Species Illustration Photo"].src 
     ret.name = fish["Species Name"]
     ret.description = fish["Physical Description"]
     ret.location = fish["Location"]
