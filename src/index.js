@@ -3,31 +3,17 @@ import {render} from "./graph"
 const fishProfileContainer = document.querySelector("[fish-profile-container]")
 const fishProfileTemplate = document.querySelector("[fish-profile-template]")
 const search = document.querySelector("[data-search]")
-const fishIcon = document.querySelector(".image-container")
-let fishGraph = []
 
+let fishGraph = []
 let fishes; 
 
-document.addEventListener("DOMContentLoaded",()=> start()) //triggers whole start
+document.addEventListener("DOMContentLoaded",()=> start())
 
 async function start() {
-     //this is for the search bar filter.  It'll store the filtered fish in an array
-
-    //this grabs a key/value pair of the fish and how abundant it is 
-
     addLinks()
-    //when browser has finish loading....
-    //fires when everything is ready when DOM is ready
-    //safeguard between trying to access element before domtree has fully loaded
-    // put all your dom manipulations here
 
-    //this funciton will be used to redirect to detailed page of a specific fish
-
-    //i want this to listen to a clicked iimage once it is clicked the detailed
-    //function will run to change the page to the specific fish deatils 
     fishProfileContainer.addEventListener("click", (e) => {
         const fish = e.target.parentNode
-        console.log(fish)
         const id = fish.dataset['id']
         singleFishPage(fishes[id]) //grabs whole fishes array
     });
@@ -41,18 +27,16 @@ async function start() {
     })
  
     async function fetchfishes() {
-        // const apiUrl = "https://www.fishwatch.gov/api/species"
         let restResponse = await fetch("https://www.fishwatch.gov/api/species")
         let data = await restResponse.json()
     
-        // second function
-        console.log(data)
-        return data.map(createFish) // will give fish object
-        // console.log(fish)
+        return data.map(createFish)  //map will use createFish to make an object with fish parameters from api data
+        //data is an array of object with fish properties
     }
-    fishes = await fetchfishes()
-    fishes = fishes.filter(fish => fish.image)
-    fishes.forEach(renderFish) //render fish with ids
+
+    fishes = await fetchfishes() //same as above
+    fishes = fishes.filter(fish => fish.image) //don't need this anymore
+    fishes.forEach(renderFish) //render fish with ids and these are the icons we set ask about children
     render(fishes) // for graph
 }
 
@@ -103,7 +87,7 @@ function singleFishPage(fish) {
 }
 
 function renderFish(fish,index) { //index is used for the html so we can figure out what fish it is when we click on it
-    const profile = fishProfileTemplate.content.cloneNode(true).children[0]
+    const profile = fishProfileTemplate.content.cloneNode(true).children[0] //difference between this and append?
     const name = profile.querySelector("h3")
     const image = profile.querySelector("img")
     image.src = fish.image
@@ -116,7 +100,7 @@ function renderFish(fish,index) { //index is used for the html so we can figure 
 //will work with a single copy versus our other render fish function
 
 function createFish(fish) {
-    let ret = {} //return
+    let ret = {} 
     ret.image = fish["Species Illustration Photo"].src 
     ret.name = fish["Species Name"]
     ret.description = fish["Physical Description"]
@@ -170,14 +154,13 @@ function searchResult(fishes,value){
 
 function getPageConfig(){
     return {
-        links:document.querySelectorAll("header [data-page]"),
-        pages:document.querySelectorAll("main [data-page]")
+        links: document.querySelectorAll("header [data-page]"),
+        pages: document.querySelectorAll("main [data-page]")
     }
 }
 
 function addLinks() {
     const config = getPageConfig()
-    console.log(config)
     config.links.forEach(link => {
         link.addEventListener('click',()=>{
             changePage(link.dataset.page)
