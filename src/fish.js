@@ -1,3 +1,4 @@
+const fishProfileContainer = document.getElementById("fish-profile-container")
 
 export function createFish(fish) {
     let fishObj = {}
@@ -38,7 +39,7 @@ export function createFish(fish) {
     return fishObj
 }
 
-function updateFishProfile(fish) {
+export function updateFishProfile(fish) {
     const container = document.getElementById("single-fish")
     const name = document.getElementById("fish-name")
     const descriptionTitle = document.getElementById("fish-description-title")
@@ -83,7 +84,7 @@ function updateFishProfile(fish) {
     }
 }
 
-function addFishIcon(fish, index) {
+export function addFishIcon(fish, index) {
     const fishProfileTemplate = document.getElementById("fish-profile-template")
     const profile = fishProfileTemplate.content.cloneNode(true).children[0]
     const name = profile.querySelector("h3")
@@ -93,4 +94,13 @@ function addFishIcon(fish, index) {
     fishProfileContainer.append(profile)
     profile.dataset.id = index
 }
+
+export function fishIconWatch(allFish) {
+    fishProfileContainer.addEventListener("click", (e) => {
+        const fish = e.target.parentNode
+        const id = fish.dataset['id']
+        updateFishProfile(allFish[id]) 
+    })
+} 
+
 

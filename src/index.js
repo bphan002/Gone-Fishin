@@ -1,7 +1,6 @@
 import { graph } from "./graph"
-import { createFish, updateFishProfile, addFishIcon} from "./fish"
+import { createFish, updateFishProfile, addFishIcon, fishIconWatch} from "./fish"
 
-const fishProfileContainer = document.getElementById("fish-profile-container")
 
 let fishToGraph = []
 let allFish = []
@@ -11,11 +10,8 @@ document.addEventListener("DOMContentLoaded", () => start())
 async function start() {
     configLinks()
 
-    fishProfileContainer.addEventListener("click", (e) => {
-        const fish = e.target.parentNode
-        const id = fish.dataset['id']
-        updateFishProfile(allFish[id])
-    });
+    //place holder
+  
 
     const searchInput = document.getElementById("search")
     searchInput.addEventListener("input", e => {
@@ -32,6 +28,7 @@ async function start() {
     allFish = await fetchFishes()
     allFish.forEach(addFishIcon)
     graph(allFish) //sample graph
+    fishIconWatch(allFish)
 }
 
 
