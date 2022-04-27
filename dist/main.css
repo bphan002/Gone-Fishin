@@ -1,25 +1,53 @@
 /*!*************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
   \*************************************************************************************************************************************/
-main {
-  display: flex;
+body {
+  font-family: sans-serif;
+  font-size: 25px;
 }
 
 header {
+  padding: 25px 25px;
   display: flex;
-  flex-direction: column;
-  padding: 25px;
+  justify-content: space-between;
+  align-items: center;
   border-style: solid;
-  border-color: red;
+  border-width: 1px;
+  background-color: black;
+  border: solid yellow;
+}
+header .right-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .right-header input[type=search] {
+  margin: 10px;
+  text-align: center;
+  border-radius: 60%;
+  background-color: rgb(193, 228, 242);
+  padding: 30px;
+  border: 5px solid white;
+}
+header img {
+  max-height: 80px;
+  fill: white;
 }
 
 nav {
   border-style: solid;
-  border-color: green;
-  padding: 25px;
+  background-color: white;
+  padding: 5px;
+  margin-right: 20px a;
+  margin-right-display: block;
 }
-nav a {
-  display: block;
+
+li {
+  font-size: 30px;
+  margin-right: 40px;
+}
+li a {
+  text-decoration: none;
 }
 
 .hide {
@@ -27,12 +55,13 @@ nav a {
 }
 
 body {
-  /* background-image: url("/src/image/background.jpg"); */
+  background-image: url("/src/image/background.jpg");
+  background-size: cover;
 }
 
 .fish-profiles {
   /* .image-container { */
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
   position: relative;
 }
@@ -43,14 +72,6 @@ body {
   height: 150px;
   /* border: solid #5B6DCD 10px; */
   transition: 0.5s;
-}
-
-.fish-profiles img:hover {
-  /* .image-container img:hover {  */
-  transform: scale(1.15);
-  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
-  filter: brightness(125%);
-  cursor: pointer;
 }
 
 .center {
@@ -67,15 +88,25 @@ body {
 
 .profile {
   position: relative;
+  border: 8px solid black;
+}
+
+.profile:hover {
+  transform: scale(1.1);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5);
+  filter: brightness(125%);
+  cursor: pointer;
+  background-color: black;
+  z-index: 5;
 }
 
 .profile h3 {
   pointer-events: none;
   opacity: 0;
-  transition: 0.5s;
   text-align: center;
   color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5px 5px;
 }
 
 .profile:hover h3 {
@@ -91,21 +122,86 @@ body {
   display: none;
 }
 
-#single-fish-info-container {
-  display: flex;
+#single-fish {
   justify-content: center;
+  align-content: center;
+  padding: 30px;
+  border: green;
+}
+
+#single-fish-image {
+  width: 1000px;
+  height: 1000px;
+  max-height: 100%;
+  max-width: 100%;
+  background-color: white;
+  padding: 20px;
   align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+}
+
+#fish-info-container {
+  margin-left: 30px;
+  width: 1000px;
+  height: 1000px;
+  padding: 30px;
+  border: white solid 20px;
+  padding: 20px;
+  background-color: lightblue;
+  flex-shrink: 1;
 }
 
 #fish-name {
+  font-weight: bold;
   font-size: 50px;
   margin-left: 20px;
 }
 
-#fish-location li, #fish-description li {
-  list-style-type: none;
+#fish-location li,
+#fish-description li {
+  margin-left: 35px;
 }
 
 h2 {
+  font-size: 40px;
   margin-left: 25px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-container {
+  border: solid green 5px;
+  position: relative;
+  background-color: white;
+  margin-top: 30px;
+  padding-right: 200px;
+  border: 4px solid black;
+}
+.svg-container li {
+  font-size: 25px;
+  list-style: square;
+  marker-font-size: 100px;
+  marker-font-weight: bolder;
+}
+.svg-container .sigabove {
+  color: rgb(0, 100, 0);
+}
+.svg-container .sigbelow {
+  color: red;
+}
+
+button {
+  cursor: pointer;
+  margin-top: 30px;
+  margin-left: 30px;
+  color: rgb(51, 51, 51);
+  padding: 10px;
+  border-radius: 24px;
+  border: 4px solid black;
+  background-color: white;
 }

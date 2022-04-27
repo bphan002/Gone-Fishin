@@ -57,7 +57,6 @@ async function start() {
 
 
 function singleFishPage(fish) {
-    console.log('hi')
     const container = document.getElementById("single-fish")
     const name = document.getElementById("fish-name")
     const descriptionTitle = document.getElementById("fish-description-title")
@@ -65,13 +64,9 @@ function singleFishPage(fish) {
     const image = document.getElementById("single-fish-image")
     const location = document.getElementById('fish-location')
     const locationTitle = document.getElementById("fish-location-title")
-    console.log("!!!")
-    console.log(container)
     const button = container.querySelector('button')
-    console.log(button)
     
     name.innerHTML = fish.name
-    // fish.location ? locationTitle.innerHTML = "Location"
     locationTitle.innerHTML = fish.location ? "Location" : ""
     location.innerHTML = fish.location
     descriptionTitle.innerHTML = fish.description ? "Description" : ""
@@ -176,13 +171,14 @@ function searchResult(fishes,value){
 
 function getPageConfig(){
     return {
-        links:document.querySelectorAll("nav [data-page]"),
+        links:document.querySelectorAll("header [data-page]"),
         pages:document.querySelectorAll("main [data-page]")
     }
 }
 
 function addLinks() {
     const config = getPageConfig()
+    console.log(config)
     config.links.forEach(link => {
         link.addEventListener('click',()=>{
             changePage(link.dataset.page)
