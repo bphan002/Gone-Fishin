@@ -7,11 +7,17 @@ const height = +svg.attr('height')
 export function graph(data) {
     svg.selectAll("*").remove()
 
+
+
     const margin = {
         top: 15,
-        right: 50,
-        bottom: 250,
+        right: 100,
+        bottom: 200,
         left: 200
+    }
+
+    if (data.length > 4) {
+        margin.bottom = 300
     }
     const graphWidth = width - margin.left - margin.right
     const graphHeight = height - margin.top - margin.bottom
@@ -25,7 +31,7 @@ export function graph(data) {
         .domain(data.map(fish => fish.name))
         .range([0, graphWidth])
         .padding(0.1)
-
+        
     const yScale = scaleLinear()
         .domain([0, 250])
         .range([graphHeight, margin.bottom + margin.top]) 
@@ -40,8 +46,12 @@ export function graph(data) {
             .transition().duration(2000)
             .delay((d, i) => i * .5)
             .attr('width', xScale.bandwidth())
+     
+    root.append("g")
+        .attr("transform", `translate(0,${graphHeight})`)
+        .call(axisBottom(xScale))
+        
 
-    //dynamic way to make graph more readable
     let rotation = -90
     let anchor = "end"
     if (data.length < 5) {
@@ -49,37 +59,47 @@ export function graph(data) {
         anchor = "middle"
     }
 
+
+    // const size =  data.length < 5  ?
+    let fontSize;
+    if (data.length < 2) {
+        fontSize = 40
+    } else if (data.length < 4) {
+        fontSize = 18 -data.length
+    } else {
+        fontSize = 18
+    }
+
     root.selectAll("text")
-        .attr("transform", `translate(-12,10) rotate(${rotation})`)
+        .attr("transform", `translate(-12,10)rotate(${rotation})`)
         .attr("text-anchor", anchor )
         .style("fill", "black")
-        .style("font-size", 36 - data.length)
+        .style("font-size", fontSize)
 
     const yAxis = axisLeft(yScale) //putting axes label
     yAxis(root.append('g'))  // adds the left axis label
 
-    svg.append("text")
-        .attr("class", "y label")
-        .attr("text-anchor", "end")
-        .attr("y", margin.left - 50)
-        .attr("x", -graphHeight/2)
-        .style("font-size", "35px")
-        .attr("transform", "rotate(-90)")
-        .text("Calories");
     
-   
+    svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", margin.left - 70)
+    .attr("x", -graphHeight/2)
+    .style("font-size", "35px")
+    // .attr('transform', "translate('600÷','600')")
+    .attr("transform", "rotate(-90)")
+    .text("Calories");
+    
     const xAxisLabel = data.length > 1 ? "Fish Names" : "Fish Name"
-
     svg.append("text")
-        .attr("class", "x label")
-        .attr("text-anchor", "end")
-        .attr("y", graphHeight + margin.bottom)
-        .attr("x", margin.right + (width/2))
-        .style("font-size", "35px")
-        .text(xAxisLabel);
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("y", graphHeight + margin.bottom)
+    .attr("x", margin.right + (width/2))
+    .style("font-size", "35px")
+    .text(xAxisLabel);
 
-    const graphTitle = data.length > 1 ? "Fishes" : "Fish"
-    
+    let graphTitle =data.length > 1 ? "Fishes" : "Fish"
     root.append("text")
         .attr("x",(graphWidth/2))
         .attr("y", (20+ margin.top + margin.bottom))
