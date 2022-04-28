@@ -108,7 +108,7 @@ function createFish(fish) {
     fishObj.calories = fish['Calories']
 
     let populationSentence = fish.Population
-    // console.log(populationSentence)
+    
     if (populationSentence === null) {
         fishObj.status = "unknown"
         fishObj.color = "black"
@@ -132,9 +132,7 @@ function createFish(fish) {
     } else if (populationSentence.toLowerCase().includes("near target level")) {
         fishObj.status = "near target level"
         fishObj.color = "rgb(255,170,1)"
-    } else {
-        console.log(populationSentence)
-    }
+    } 
 
     return fishObj
 }
