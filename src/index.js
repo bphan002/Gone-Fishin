@@ -149,11 +149,6 @@ function showFishMatch(fishes, value) {
 
 }
 
-//find all of the nav items that have data attribute data-page
-// go through all elements in main that have that tag and create a list
-//add event listenrs to each of those
-// loop through all of the elements prev stored and hide them unless data matches
-
 function getPageConfig() {
     return {
         links: document.querySelectorAll("header [data-page]"),
