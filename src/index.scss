@@ -5,7 +5,7 @@ body {
   font-size: 25px;
 }
 
-ul {
+.top-header {
   display:flex;
   list-style-type: none;
   li a{
@@ -248,17 +248,21 @@ button {
 .legend {
   position: absolute;
   border: 3px solid black;
-  left: 825px;
+  left: 900px;
   padding: 20px;
   height: 360px;
   p {
-    font-size: 26px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 25px;
     font-weight: bold;
   }  
 }
 
 .legend-text {
   margin-left: 75px;
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 span {
@@ -273,42 +277,42 @@ span {
 
 .legend-box-1 {
   position: absolute;
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: rgb(39,201,37);
 }
 
 .legend-box-2 {
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: rgb(193,228,242);
 }
 
 .legend-box-3 {
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: rgb(255,170,1);
 }
 
 .legend-box-4 {
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: rgb(230,32,0);
 }
 
 .legend-box-5 {
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: rgb(115,10,0);
 }
 .legend-box-6 {
-  right: 275px;
-  top: 5px;
+  right: 175px;
+  top: 1px;
   position: absolute;
   background-color: black;
 }
