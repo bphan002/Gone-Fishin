@@ -65,7 +65,7 @@ export function graph(data) {
     if (data.length < 2) {
         fontSize = 40
     } else if (data.length < 4) {
-        fontSize = 18 -data.length
+        fontSize = 18 - data.length
     } else {
         fontSize = 18
     }
@@ -86,7 +86,6 @@ export function graph(data) {
     .attr("y", margin.left - 70)
     .attr("x", -graphHeight/2)
     .style("font-size", "35px")
-    // .attr('transform', "translate('600÷','600')")
     .attr("transform", "rotate(-90)")
     .text("Calories");
     
@@ -99,7 +98,7 @@ export function graph(data) {
     .style("font-size", "35px")
     .text(xAxisLabel);
 
-    let graphTitle =data.length > 1 ? "Fishes" : "Fish"
+    let graphTitle = data.length > 1 ? "Fishes" : "Fish"
     root.append("text")
         .attr("x",(graphWidth/2))
         .attr("y", (20+ margin.top + margin.bottom))

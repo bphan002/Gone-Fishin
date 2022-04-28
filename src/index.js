@@ -182,17 +182,3 @@ function changePage(targetPage) {
         }
     })
 }
-
-
-///if i put an event listner on single-fish
-
-//it would be triggered on any children of single-fish
-
-//target that will give you is the acdtual target elemnt that you click on
-
-//parent elmeent is jsut the parent elemnt of that item
-
-//if you have different level of nesting liek this
-//it can be one of 3 things
-
-//
