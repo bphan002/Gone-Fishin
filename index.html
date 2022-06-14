@@ -12,6 +12,7 @@
 <body>
     <header class="head-container">
             <ul class="top-header">
+                <li><a href="/instructions.html">Instructions</a></li>
                 <li class=""><a data-page= "fish-profiles" href="#">Fish Directory</a></li>
                 <li><a data-page= "graph" href="#">Fish Graph</a></li>
             </ul>
@@ -23,41 +24,38 @@
         </div>
     </header>
     <main>
-            <div class='flex-container'>
-                <div class="svg-container invisible" data-page="graph">
-                    <div id="calories"></div>
-                    <svg width="1000" height="1000"></svg>
-
-                    <div class="legend">
-                        <p>Fish Population</h1>
-                        <div class="legend-row">
-                            <span class="legend-box-1"></span>
-                            </span><div class="legend-text">Significantly Above</div>
-                        </div>
-                        <div class="legend-row">
-                            <span class="legend-box-2"></span>
-                            </span><div class="legend-text">Above</div>
-                        </div>
-                        <div class="legend-row">
-                            <span class="legend-box-3"></span>
-                            <div class="legend-text">Average</div>
-                        </div>
-                        <div class="legend-row">
-                            <span class="legend-box-4"></span>
-                            <div class="legend-text">Below</div>
-                        </div>
-                        <div class="legend-row">
-                            <span class="legend-box-5"></span>
-                            </span><div class="legend-text">Significantly Below</div>
-                        </div>
-                        <div class="legend-row">
-                            <span class="legend-box-6"></span>
-                            </span><div class="legend-text">Unknown</div>
-                        </div>
-                    </div>
-
-                </div>
+        <div class='flex-container'>
+            <div class="svg-container invisible" data-page="graph">
+                <ul class="legend-container">
+                    <li>
+                        <div class="box color-1"></div>
+                        <p>Significantly Above</p>
+                    </li>
+                    <li>
+                        <div class="box color-2"></div>
+                        <p>Above</p>
+                    </li>
+                    <li>
+                        <div class="box color-3"></div>
+                        <p>Average</p>
+                    </li>
+                    <li>
+                        <div class="box color-4"></div>
+                        <p>Below</p>
+                    </li>
+                    <li>
+                        <div class="box color-5"></div>
+                        <p>Significantly Below</p>
+                    </li>
+                    <li>
+                        <div class="box color-6"></div>
+                        <p>Unknown</p>
+                    </li>
+                </ul>
+                <div id="calories"></div>
+                <svg width="1000" height="1000"></svg>
             </div>
+        </div>
            
             <div class ="fish-profiles visible" id="fish-profile-container" data-page="fish-profiles">
                 <template id="fish-profile-template">

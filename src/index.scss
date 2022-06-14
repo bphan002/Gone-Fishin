@@ -1,28 +1,3 @@
-body {
-  background-image: url("../src/image/background.jpg");
-  background-size: cover;
-  font-family: sans-serif;
-  font-size: 25px;
-}
-
-.top-header {
-  display:flex;
-  list-style-type: none;
-  li a{
-    text-decoration: none;
-    cursor: pointer;
-    margin-top: 30px;
-
-    color: rgb(51, 51, 51);
-    padding: 10px 25px;
-    width: 45px;
-    height: 10px;
-    border-radius: 24px;
-    border: 4px solid black;
-    background-color: white;
-  }
-}
-
 header {
   padding: 25px 25px;
   display: flex;
@@ -56,7 +31,6 @@ header {
   }
 }
 
-
 nav {
   border-style: solid;
   background-color: white;
@@ -70,12 +44,34 @@ nav {
 li {
   font-size: 25px;
   margin-right: 40px;
-
   a {
     text-decoration: none;
   }
 }
 
+body {
+  background-image: url("src/image/background.jpg");
+  background-size: cover;
+  font-family: sans-serif;
+  font-size: 25px;
+}
+
+.top-header {
+  display:flex;
+  list-style-type: none;
+  li a{
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 30px;
+
+    color: rgb(51, 51, 51);
+    padding: 10px 25px;
+    width: 45px;
+    height: 10px;
+    border-radius: 24px;
+    background-color: white;
+  }
+}
 
 .hide {
   display: none;
@@ -147,6 +143,10 @@ li {
   display: none;
 }
 
+.svg-container.invisible { 
+  display: none;
+}
+
 #single-fish {
   justify-content: center;
   align-content: center;
@@ -209,11 +209,18 @@ h2 {
 }
 
 .svg-container {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
+  width: 100%;
   background-color: white;
   margin-top: 30px;
   padding-right: 200px;
   border: 4px solid black;
+
+
 }
 
 .legend-row {
@@ -245,78 +252,92 @@ button {
   font-size: 25px;
 }
 
-.legend {
-  position: absolute;
-  border: 3px solid black;
-  left: 900px;
-  padding: 20px;
-  height: 360px;
-  p {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 25px;
-    font-weight: bold;
-  }  
-}
-
-.legend-text {
-  margin-left: 75px;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
 span {
   display: inline-block;
   width: 25px;
   height: 25px; 
 
 }
-.legend-row {
-  position: relative;
+
+
+.legend {
+  display: flex;
+  flex-direction: column;
 }
 
-.legend-box-1 {
-  position: absolute;
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: rgb(39,201,37);
+.legend-values {
+  display:flex;
 }
 
-.legend-box-2 {
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: blue
+
+
+
+//temporary height and width
+.legend-container {
+  width:400px;
+  display:flex;
+  flex-direction: column;
+  padding: 20px;
+  margin-bottom: 6px;
+  border: 2px solid black;
+  
+
+  li {
+    display:flex;
+    list-style-type: none;
+    position:relative;
+    margin-bottom: 5px;
+  }
+
+  li p {
+    margin-top: -8px;
+    margin-left: 5px;
+  }
+
+  li .legend-text {
+      display:inline-block
+  }
+
+  .box {
+    display:flex;
+    height: 20px;
+    width: 20px;
+    border: 2px solid;  
+  }
+
+  .color-1{
+    background-color: green;
+  }
+
+  .color-2{
+    background-color: lightgreen;
+  }
+
+  .color-3 {
+    background-color: yellow;
+  }
+
+  .color-4{
+    background-color: orange;
+  }
+
+  .color-5 {
+    background-color: red;
+  }
+
+  .color-6 {
+    background-color: black;;
+  }
+
+
+  
 }
 
-.legend-box-3 {
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: rgb(255,170,1);
-}
 
-.legend-box-4 {
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: rgb(230,32,0);
-}
 
-.legend-box-5 {
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: rgb(115,10,0);
-}
 
-.legend-box-6 {
-  right: 175px;
-  top: 1px;
-  position: absolute;
-  background-color: black;
-}
+
+
 
 @media (max-width: 1192px) {
   header {
@@ -358,6 +379,9 @@ span {
 
 @media (max-width: 628px) {
   
+
+
+
   #fish-name {
     font-size: 20px;
   }
@@ -408,5 +432,14 @@ span {
 
   #single-fish.invisible{
     display: none;
+  }
+
+  .legend-container {
+    width:300px;
+    margin-left: 140px;
+
+    p {
+      font-size: 22px;
+    }
   }
 }
