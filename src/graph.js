@@ -1,8 +1,13 @@
 import {select, scaleBand, scaleLinear, axisLeft, axisBottom } from "d3"
 
 const svg = select('svg')
-const width = +svg.attr('width')
+const svg2 = document.querySelector("svg")
+const flexContainer = document.querySelector(".flex-container")
+const width = flexContainer.clientWidth
 const height = +svg.attr('height')
+// console.log(svg.getBoundingClientRect())
+// console.log(svg2.getBoundingClientRect())
+console.log(width)
 
 export function graph(data) {
     svg.selectAll("*").remove()

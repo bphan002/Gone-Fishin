@@ -24,12 +24,6 @@ async function start() {
         showFishMatch(allFish, value)
     })
 
-    // async function fetchFishes() {
-    //     let restResponse = await fetch("https://www.fishwatch.gov/api/species")
-    //     let data = await restResponse.json()
-    //     return data.map(createFish)
-    // }
-
     function fakeAPICall() {
         let data = restResponse  //restResponse already parsed
         return data.map(createFish)
@@ -144,7 +138,6 @@ function showFishMatch(fishes, value) {
         const isVisible = fishes[index].name.toLowerCase().includes(value)
         ele.classList.toggle("hide", !isVisible)
     })
-
 }
 
 function getPageConfig() {
