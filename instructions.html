@@ -5,16 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructions</title>
-    <link rel="stylesheet" href="./dist/main.css"/> 
     <link rel="icon" type="image/x-icon" href="src/image/fish-favicon.ico">
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./dist/main.css"/> 
 </head>
 <body>
-    <p>The information for this application came from www.fishwatch.gov's API/p>
-    <p>By using their data, a bar graph can dynamically be rendered that shows a fish's calories, and see how healthy the species population is doing by the bar color.</p>
-    <p>To see a sample of what it looks like you can click on the Fish Graph in the navigation bar</p>
-    <p>To create a graph you need to first add that fish. You can find a fish by scrolling through the pictured tiles or narrow it down with the search feature in the upper right</p>
-    <p>Once an image is clicked you can add that fish to a graph by clicking the Add Fish to Graph button </p>
-    <p>From the same position you can deselect a fish from appearing on the graph by clicking on the remove fish from graph button</p>
-    <p>To reset the graph you can refresh the page</p>
+    <header class="head-container">
+        <ul class="top-header">
+            <li class=""><a data-page= "fish-profiles" href="index.html">Fish Directory</a></li>
+        </ul>
+        <div class="right-header">
+
+            <img src="/images/bubbles.png" alt="">
+            <img class="fish-search" src="/images/logo.png" alt="fish logo">
+        </div>
+    </div>
+</header>
+    <div class="instructions-container">
+        <h2>The information for this application came from an API provided by <a href="https://www.fishwatch.gov/">www.fishwatch.gov</a>.</hh1>
+        <h2 class="underline">Instructions</h2>
+        <ol class="features">
+            <li>Bar graph can dynamically be rendered to show a fish's calories and the health of a species population by the bar color</li>
+            <li>An example graph can be viewed by clicking on the Fish Graph button</li>
+            <li>The maximum fish you can add to a graph is 20 for desktop, 10 for tablets, and 5 for mobile users</li>
+            <li>To create a graph you need to add a fish. You can find a fish by scrolling through the fish tiles or narrow it down with the search bar</li>
+            <li>Next click on the image, which will take you to a details page for that fish</li> 
+            <li>Click the "Add Fish to Graph" button</li>
+            <li>From the same position you can deselect a fish from appearing on the graph by clicking on the remove fish from graph button</li>
+            <li>To reset the graph you can reload the page</li>
+        </ol>
+    </div>
 </body>
 </html>

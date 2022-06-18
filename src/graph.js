@@ -12,8 +12,6 @@ console.log(width)
 export function graph(data) {
     svg.selectAll("*").remove()
 
-
-
     const margin = {
         top: 15,
         right: 100,
@@ -27,14 +25,71 @@ export function graph(data) {
     const graphWidth = width - margin.left - margin.right
     const graphHeight = height - margin.top - margin.bottom
 
-    data = data.slice(0, 20) //to make graph still readable
+    let screenWidth = window.innerWidth
+
+    if (screenWidth < 850) {
+        data = data.slice(0,5)
+    } else if (screenWidth < 1276) {
+        data = data.slice(0, 10) //to make graph still readable
+    } else {
+        data = data.slice(0,20)
+    }
+
+
+    let rotation = -90
+    let anchor = "end"
+    if (data.length < 5) {
+        rotation = 0
+        anchor = "middle"
+    }
+
+ 
+
+
+    // const size =  data.length < 5  ?
+    let fontSize;
+    let distanceCorrection = 0
+    let xrange = graphWidth
+    let singleFishSize = 12
+    if (data.length < 2 ) {
+        fontSize = 40
+        singleFishSize = 20
+        distanceCorrection = 50
+        
+    } else if (data.length < 4) {
+        fontSize = 18 - data.length
+        singleFishSize = 18
+        distanceCorrection = 50
+        rotation = -90
+        anchor = "end"
+    } else {
+        fontSize = 40
+        singleFishSize = 22
+        rotation = -90
+        anchor = "end"
+    }
+
+        let titleDistanceCorrection = 0;
+       //media query for mobile
+       if (data.length < 2 && screenWidth < 850) {
+            fontSize = 30
+            titleDistanceCorrection = 35
+            distanceCorrection = 40
+            xrange = 160
+       } else if (data.length >= 2 && screenWidth < 850) {
+            fontSize = 30
+            titleDistanceCorrection = 35
+            distanceCorrection = 40
+            xrange = 160 
+            singleFishSize = 18
+       }
     
     const root = svg.append('g') // group element
         .attr('transform', `translate(${margin.left},${margin.top})`)
     
     const xScale = scaleBand()
         .domain(data.map(fish => fish.name))
-        .range([0, graphWidth])
+        .range([0, xrange])
         .padding(0.1)
         
     const yScale = scaleLinear()
@@ -57,29 +112,12 @@ export function graph(data) {
         .call(axisBottom(xScale))
         
 
-    let rotation = -90
-    let anchor = "end"
-    if (data.length < 5) {
-        rotation = 0
-        anchor = "middle"
-    }
-
-
-    // const size =  data.length < 5  ?
-    let fontSize;
-    if (data.length < 2) {
-        fontSize = 40
-    } else if (data.length < 4) {
-        fontSize = 18 - data.length
-    } else {
-        fontSize = 18
-    }
 
     root.selectAll("text")
         .attr("transform", `translate(-12,10)rotate(${rotation})`)
         .attr("text-anchor", anchor )
         .style("fill", "black")
-        .style("font-size", fontSize)
+        .style("font-size", singleFishSize)
 
     const yAxis = axisLeft(yScale) //putting axes label
     yAxis(root.append('g'))  // adds the left axis label
@@ -88,26 +126,25 @@ export function graph(data) {
     svg.append("text")
     .attr("class", "y label")
     .attr("text-anchor", "end")
-    .attr("y", margin.left - 70)
-    .attr("x", -graphHeight/2)
-    .style("font-size", "35px")
+    .attr("y", margin.left - 80)
+    .attr("x", - graphHeight/1.5)
+    .style("font-size", fontSize)
     .attr("transform", "rotate(-90)")
     .text("Calories");
     
-    const xAxisLabel = data.length > 1 ? "Fish Names" : "Fish Name"
+    const xAxisLabel = ""
     svg.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
-    .attr("y", graphHeight + margin.bottom)
+    .attr("y", graphHeight + margin.bottom - distanceCorrection)
     .attr("x", margin.right + (width/2))
-    .style("font-size", "35px")
     .text(xAxisLabel);
 
     let graphTitle = data.length > 1 ? "Fishes" : "Fish"
     root.append("text")
         .attr("x",(graphWidth/2))
-        .attr("y", (20+ margin.top + margin.bottom))
+        .attr("y", (20+ margin.top + margin.bottom - titleDistanceCorrection))
         .attr("text-anchor", "middle")
-        .style("font-size", "50px")
+        .style("font-size", "40px")
         .text(graphTitle)
 }

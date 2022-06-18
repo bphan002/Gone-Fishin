@@ -2,6 +2,13 @@
 
 body {
   background-image: url("../images/background.jpg");
+  background-size: cover;;
+}
+
+
+button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
 }
 
 header {
@@ -144,6 +151,10 @@ body {
   z-index: 999;
 }
 
+#max-error {
+  color:red;
+}
+
 .invisible {
   display: none;
 }
@@ -221,7 +232,7 @@ h2 {
   position: relative;
   width: 100%;
   background-color: white;
-  margin-top: 30px;
+  // margin-top: 30px;
   border: 4px solid black;
 
 
@@ -269,8 +280,17 @@ span {
   flex-direction: column;
 }
 
+.legend-title {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 .legend-values {
   display:flex;
+}
+
+text.x.label, text.y.label {
+  font-size: 40px;
 }
 
 
@@ -340,10 +360,7 @@ span {
 
 
 
-
-
-
-@media (max-width: 1192px) {
+@media (max-width: 1360px) {
   header {
     display: flex;
     flex-direction: column;
@@ -381,13 +398,20 @@ span {
   
 }
 
-@media (max-width: 628px) {
-  
+@media (max-width: 796px) {
 
+  button {
+    margin-left: 0px;
+  }
 
+  .button {
+    display:flex;
+    justify-content: center;
+  }
 
   #fish-name {
     font-size: 20px;
+    margin-left: 0px;
   }
 
   .top-header {
@@ -410,28 +434,42 @@ span {
 
   #fish-location-title {
     font-size:20px;
+    margin-left: 0px;
+  }
+
+  #fish-location ul {
+    padding:10px;
   }
 
   #fish-location ul li {
-    font-size:25px;
+    font-size:20px;
     margin-left: 0px;
     margin-right: 0px;
   }
 
   #fish-location li {
-    font-size:25px;
+    font-size:20px;
     margin-left: 0px;
     margin-right: 0px;
+    list-style-type: none;
   }
 
   #fish-description-title {
     font-size: 20px;
+    margin-left:0px;
   }
 
-  #fish-description li {
-    font-size: 25px;
-    margin-left: 0px;
-    margin-right: 0px;
+  #fish-description{
+    li {
+      font-size: 20px;
+      margin-left: 0px;
+      margin-right: 0px;
+      list-style-type: none;
+    }
+   
+    ul {
+      padding: 10px;
+  }
   }
 
   #single-fish.invisible{
@@ -440,10 +478,83 @@ span {
 
   .legend-container {
     width:300px;
-    margin-left: 140px;
+    margin-bottom: 40px;
 
-    p {
-      font-size: 22px;
+    li p {
+      font-size: 18px;
+      margin-top: -3px
     }
+
   }
+  .instructions-container {
+  
+    h2 {
+      font-size:20px
+    }
+  
+    p {
+      font-size: 20px;
+    }
+
+   
+
+    li {
+      font-size: 15px;
+      list-style: none;
+      margin-left:10px;
+      margin:0px;
+    }
+    ol {
+      padding: 0px;
+      margin-top:0px;
+    }
+
+  
+  }
+
+  svg {
+    margin-left: -90px;
+    margin-top: -200px;
+  }
+
+  text.x.label, text.y.label {
+    font-size:30px;
+  }
+
+  text.x.label {
+    position:relative;
+    bottom: 300px;
+  }
+}
+
+// instructions page
+.instructions-container {
+  margin: 40px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+  border: 10px solid black;
+  
+
+  h2 {
+    margin: 10px 25px;
+  }
+
+  p, li {
+    padding: 5px;
+    color: black;
+    margin: 20px;
+    margin-left:15px;
+    list-style: none;;
+  }
+
+  .underline {
+    text-decoration: underline;
+  }
+
+  p {
+    font-size: 25px;
+  }
+
 }
