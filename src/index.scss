@@ -370,6 +370,7 @@ text.x.label, text.y.label {
     color: white;
     list-style-type: none;
     font-size: 18px;
+    padding-bottom: 5px;
   }
 }
 
@@ -377,6 +378,10 @@ text.x.label, text.y.label {
   display:flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon {
+  width: 65px;
 }
 
 .kick-icon {
