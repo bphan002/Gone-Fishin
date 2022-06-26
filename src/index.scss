@@ -366,7 +366,6 @@ text.x.label, text.y.label {
   height:200px;
   background-color: black;
   
-
   p {
     color: white;
     list-style-type: none;
@@ -380,8 +379,9 @@ text.x.label, text.y.label {
   align-items: center;
 }
 
-.icon {
-  width: 75px;
+.kick-icon {
+  width: 65px;
+  background:white;
 }
 
 
