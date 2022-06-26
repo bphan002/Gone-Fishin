@@ -357,6 +357,21 @@ text.x.label, text.y.label {
   
 }
 
+.footer {
+  margin-top:10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  height: 200px;
+  z-index:4;
+
+  ul li {
+    color: white;
+    list-style-type: none;
+    font-size: 18px;
+  }
+}
 
 
 
