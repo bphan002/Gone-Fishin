@@ -367,14 +367,15 @@ text.x.label, text.y.label {
   background-color: black;
   
 
-  ul li {
+  p {
     color: white;
     list-style-type: none;
     font-size: 18px;
   }
 }
 
-icons {
+.icons {
+  display:flex;
   justify-content: center;
   align-items: center;
 }
