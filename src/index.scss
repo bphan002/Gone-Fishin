@@ -364,7 +364,6 @@ text.x.label, text.y.label {
   align-items: center;
   background-color: black;
   height: 200px;
-  z-index:4;
 
   ul li {
     color: white;
@@ -372,7 +371,7 @@ text.x.label, text.y.label {
     font-size: 18px;
   }
 
-  img {
+  a img {
     width: 75px;
   }
 }
