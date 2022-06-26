@@ -5,9 +5,6 @@ const svg2 = document.querySelector("svg")
 const flexContainer = document.querySelector(".flex-container")
 const width = flexContainer.clientWidth
 const height = +svg.attr('height')
-// console.log(svg.getBoundingClientRect())
-// console.log(svg2.getBoundingClientRect())
-console.log(width)
 
 export function graph(data) {
     svg.selectAll("*").remove()
@@ -43,10 +40,6 @@ export function graph(data) {
         anchor = "middle"
     }
 
- 
-
-
-    // const size =  data.length < 5  ?
     let fontSize;
     let distanceCorrection = 0
     let xrange = graphWidth
@@ -69,8 +62,7 @@ export function graph(data) {
         anchor = "end"
     }
 
-        let titleDistanceCorrection = 0;
-       //media query for mobile
+       let titleDistanceCorrection = 0;
        if (data.length < 2 && screenWidth < 850) {
             fontSize = 30
             titleDistanceCorrection = 35

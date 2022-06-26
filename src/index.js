@@ -54,31 +54,16 @@ function updateFishProfile(fish) {
     applyButtontext(fish, button)
 
     button.onclick = () => {
-        //
-        // console.log(allFish)
         fish.selected = !fish.selected
-        console.log('fish selected',fish.selected)
-        //    return console.log('too many fish for small screen size')
-        // } else if (screenSize <1276 && fishToGraph.length === 10) {
-            //     //display erro rmessage
-            //     return console.log('too many fish for mediu screen size')
-            // } else if (fishToGraph.length === 20) {
-                //     //display errormessage
-                //     return console.log('too many fish for big screen size')
-                
                 if (fish.selected) {
                     fish.selected = true
                     fishToGraph.push(fish)
-                    console.log('add fish', fishToGraph)
                 } else {
                     fishToGraph = fishToGraph.filter((ele) => {
-                        console.log('remove fish', fishToGraph)
                         return ele !== fish
                     })
                 }
-                console.log(fishToGraph)
                 graph(fishToGraph)
-                console.log('fish length', fishToGraph.length)
                 applyButtontext(fish, button)
                 
     }
@@ -98,18 +83,8 @@ function updateFishProfile(fish) {
         }        
         
         const error = document.getElementById('max-error')
-
-        console.log('fishtograph.length',fishToGraph.length)
-
-
-        
-            console.log('fish amount', fishToGraph.length)
             button.removeAttribute('disabled')
       
-
-        // console.log('max fish',maxFish)
-     
-
         if (fish.selected) {
             button.innerHTML = "Remove Fish from Graph"
             button.classList.add("remove-graph")
@@ -120,23 +95,9 @@ function updateFishProfile(fish) {
             button.classList.remove("remove-graph")
             button.classList.add("add-graph")
                 if (fishToGraph.length === maxFish) {
-                // console.log('hitting this?')
                 button.setAttribute('disabled','disabled')
                 }
         }
-
-      
-
-
-        // if (fish.selected) {
-        //     button.innerHTML = "Remove Fish from Graph"
-        //     button.classList.add("remove-graph")
-        //     button.classList.remove("add-graph")
-        // } else {
-        //     button.innerHTML = "Add Fish to Graph"
-        //     button.classList.remove("remove-graph")
-        //     button.classList.add("add-graph")
-        // }
 
     }
 }
