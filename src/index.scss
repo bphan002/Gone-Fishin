@@ -359,21 +359,23 @@ text.x.label, text.y.label {
 
 .footer {
   margin-top:10px;
+  flex-direction: column;
   display: flex;
   justify-content: center;
   align-items: center;
+  height:200px;
   background-color: black;
-  height: 200px;
+  
 
   ul li {
     color: white;
     list-style-type: none;
     font-size: 18px;
   }
+}
 
-  a img {
-    width: 75px;
-  }
+.icon {
+  width: 75px;
 }
 
 
