@@ -16,7 +16,7 @@ In Gone Fishing, users will be able to:
 4. Dynamic graph of all fish selected showing the calories, fish population, andn a name of fish
 
 In addition, this project will include:
- 1. An about modal describing the functionality
+ 1. An instruction page describing the functionality
  2. a production README
 
 
