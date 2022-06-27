@@ -330,11 +330,11 @@ text.x.label, text.y.label {
   }
 
   .color-1{
-    background-color: green;
+    background-color: rgb(8,128,0)
   }
 
   .color-2{
-    background-color: lightgreen;
+    background-color: rgb(20,125,98)
   }
 
   .color-3 {
@@ -396,12 +396,6 @@ text.x.label, text.y.label {
     display: flex;
     flex-direction: column;
   }
-  // .fish-search {
-  //   width: 100px;
-  //     display:none;
-  // }
- 
-
 
   #fish-info-container {
     max-width:100%;

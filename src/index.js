@@ -1,7 +1,6 @@
 import { graph } from "./graph"
 import {restResponse} from "./data/data.js"
 
-
 const fishProfileContainer = document.getElementById("fish-profile-container")
 
 let fishToGraph = []
@@ -133,27 +132,19 @@ function createFish(fish) {
         fishObj.color = "rgb(115,10,0)"
     } else if (populationSentence.toLowerCase().includes("significantly above")) {
         fishObj.status = "significantly above"
-        // fishObj.color = "rgb(39,201,37)"
         fishObj.color = "rgb(8,128,0)"
 
     } else if (populationSentence.toLowerCase().includes("above")) {
         fishObj.status = 'above'
-        // fishObj.color = "blue"
-        fishObj.color = "rgb(144,238,144)"
+        fishObj.color = "rgb(6,125,98)"
 
     } else if (populationSentence.toLowerCase().includes("below")) {
         fishObj.status = "below"
-        // fishObj.color = "rgb(230,32,0)"
         fishObj.color = "rgb(250,165,3)"
-    // } else if (populationSentence.toLowerCase().includes("unknown")) {
-    //     fishObj.status = "unknown"
-    //     fishObj.color = "black"
     } else if (populationSentence.toLowerCase().includes("near target level")) {
         fishObj.status = "near target level"
-        // fishObj.color = "rgb(255,170,1)"
         fishObj.color = "rgb(251,255,0)"
     } 
-
     return fishObj
 }
 
