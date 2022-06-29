@@ -3,6 +3,9 @@
 ## Instructions
 Bar graph can dynamically be rendered to show a fish's calories and the health of a species population by the bar color.
 An example graph can be viewed by clicking on the Fish Graph button.
+<br/>
+![Fish Graph Header](header.png)
+<br/>
 ![Graph Sample](chart-sample.png)
 
 
