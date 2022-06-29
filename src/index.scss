@@ -363,7 +363,6 @@ svg {
 }
 
 .footer {
-  margin-top:10px;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -380,6 +379,7 @@ svg {
 }
 
 .icons {
+  margin: 0px;
   display:flex;
   justify-content: center;
   align-items: center;
