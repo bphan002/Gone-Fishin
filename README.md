@@ -1,10 +1,12 @@
-[Gone-Fishin Live Vesion](https://bphan002.github.io/Gone-Fishin/)
+# [Gone-Fishin Live Vesion](https://bphan002.github.io/Gone-Fishin/)
 
-     <h2>The information for this application came from an API provided by <a href="https://www.fishwatch.gov/">www.fishwatch.gov</a>.</hh1>
-        <h2 class="underline">Instructions</h2>
-        <ol class="features">
-            <li>Bar graph can dynamically be rendered to show a fish's calories and the health of a species population by the bar color</li>
-            <li>An example graph can be viewed by clicking on the Fish Graph button</li>
+## Instructions
+Bar graph can dynamically be rendered to show a fish's calories and the health of a species population by the bar color.
+An example graph can be viewed by clicking on the Fish Graph button.
+![Graph Sample](chart-sample.png)
+
+
+
             <li>The maximum fish you can add to a graph is 20 for desktop, 10 for tablets, and 5 for mobile users</li>
             <li>To create a graph you need to add a fish. You can find a fish by scrolling through the fish tiles or narrow it down with the search bar</li>
             <li>Next click on the image, which will take you to a details page for that fish</li> 

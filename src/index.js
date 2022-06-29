@@ -73,8 +73,10 @@ function updateFishProfile(fish) {
 
         let screenSize = innerWidth
         let maxFish;
-        if (screenSize < 850) {
+        if (screenSize < 400) {
             maxFish = 3
+        } else if (screenSize < 850) {
+            maxFish = 5
         } else if (screenSize < 1276) {
             maxFish = 10
         } else {
