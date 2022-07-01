@@ -3,7 +3,6 @@ body {
   background-size: cover;;
 }
 
-
 button:disabled {
   background-color: gray;
   cursor: not-allowed;
@@ -222,6 +221,8 @@ h2 {
   justify-content: center;
 }
 
+
+
 .svg-container {
   display:flex;
   flex-direction: column;
@@ -292,8 +293,13 @@ text.x.label, text.y.label {
 }
 
 svg {
+  position: relative;
   margin-top: -70px;
-  margin-left: -200px;
+  max-width:90vw;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 

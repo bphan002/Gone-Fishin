@@ -1,7 +1,6 @@
 import {select, scaleBand, scaleLinear, axisLeft, axisBottom } from "d3"
 
 const svg = select('svg')
-const svg2 = document.querySelector("svg")
 const flexContainer = document.querySelector(".flex-container")
 const width = flexContainer.clientWidth
 const height = +svg.attr('height')
@@ -14,7 +13,7 @@ export function graph(data) {
         top: 15,
         right: 100,
         bottom: 200,
-        left: 200
+        left: 100
     }
 
     if (data.length > 4) {
@@ -25,7 +24,7 @@ export function graph(data) {
 
     let screenWidth = window.innerWidth
     let fishNameSpace = -19
-    let yName = -285
+    let yName = 250
     if (screenWidth < 401) {
         data = data.slice(0,3)
         fishNameSpace = 0
@@ -51,21 +50,29 @@ export function graph(data) {
     let xrange = graphWidth
     let singleFishSize = 12
     if (data.length < 2 ) {
-        fontSize = 30
-        singleFishSize = 18
+        singleFishSize = 30
         distanceCorrection = 50
+        xrange = 100
+        if (screenWidth < 850) {
+            fontSize = 18 - data.length
+        }
     } else if (data.length < 3) {
-        fontSize = 18 - data.length
-        singleFishSize = 18
+        singleFishSize = 30
         distanceCorrection = 20
         anchor = "end"
-        
+        // fontSize = 25
+        if  (screenWidth < 850) {
+            fontSize = 18 - data.length
+        } 
     } else if (data.length < 4) {
-        fontSize = 18 - data.length
         singleFishSize = 18
+        fontSize = 30
         distanceCorrection = 50
         rotation = -90
         anchor = "end"
+        if (screenWidth < 850) {
+            fontSize = 18 - data.length
+        }
     } else {
         fontSize = 40
         singleFishSize = 18
@@ -86,6 +93,9 @@ export function graph(data) {
             xrange = 160 
             singleFishSize = 18
             margin.top = -30
+       } else if (data.length < 5) {
+           xrange = 600
+           fontSize = 30
        } else if (data.length >=10) {
         margin.top = -100
        }
@@ -136,8 +146,7 @@ export function graph(data) {
             .attr("text-anchor", anchor )
             .style("fill", "black")
             .style("font-size", singleFishSize)
-            .attr("y","0")
-            .attr("dy","0em")
+            
     } else {
         root.selectAll("text")
         .attr("ticks",25)
@@ -150,16 +159,21 @@ export function graph(data) {
     const yAxis = axisLeft(yScale) //putting axes label
     yAxis(root.append('g'))  // adds the left axis label
 
+
+    //text for y-axis
+    //x controls vertical name placement
+    //y controls horizontal placement
     svg.append("text")
     .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", margin.left - 85)
-    .attr("x", - yName)
+    .attr("text-anchor", "middle")
+    .attr("y", margin.left - 65)
+    .attr("x",  - graphHeight/2)
     .style("font-size", fontSize)
     .attr("transform", "rotate(-90)")
     .text("Calories");
 
     }
+    // .range([graphHeight, margin.bottom + margin.top]) 
 
 
     // svg.append("text")

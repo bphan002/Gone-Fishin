@@ -270,8 +270,13 @@ text.x.label, text.y.label {
 }
 
 svg {
+  position: relative;
   margin-top: -70px;
-  margin-left: -200px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .legend-container {
@@ -324,7 +329,6 @@ svg {
 }
 
 .footer {
-  margin-top: 10px;
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -338,8 +342,8 @@ svg {
   font-size: 18px;
   padding-bottom: 5px;
 }
-
-.icons {
+.footer .icons {
+  margin: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
