@@ -715,9 +715,18 @@ svg {
   }
   .footer {
     margin-top:0px;
+    p {
+      font-size: 12px;
+    }
   }
 
   .tick {
     font-size: 14px;
   }
+
+  .icon {
+    width: 50px;
+  }
+
+
 }
