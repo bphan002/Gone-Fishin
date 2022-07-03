@@ -53,7 +53,7 @@ nav {
 
 li {
   font-size: 25px;
-  margin-right: 40px;
+  margin-right: 15px;
   a {
     text-decoration: none;
   }
@@ -226,14 +226,14 @@ h2 {
 .svg-container {
   display:flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   position: relative;
   width: 100%;
   background-color: rgb(193,228,242);
   max-height: 120vh;
   border: 4px solid black;
-
+  padding-left: 30px;
 
 }
 
@@ -263,7 +263,7 @@ button {
 }
 
 .tick {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 span {
@@ -294,8 +294,7 @@ text.x.label, text.y.label {
 
 svg {
   position: relative;
-  margin-top: -70px;
-  max-width:90vw;
+  margin-top: -90px;
   display:flex;
   flex-direction: column;
   justify-content: center;
@@ -307,26 +306,31 @@ svg {
 
 //temporary height and width
 .legend-container {
-  margin-top:10px;
+  margin:10px 0px 0px 20px;
   display:flex;
   justify-content: center;
   flex-direction: column;
-  padding: 5px;
+  padding: 10px;
   margin-bottom: 6px;
   background-color: white;
   border: 2px solid black;
+
+  .legend-title {
+    font-size: 30px;
+  }
   
   li {
     font-size:16px;
     display:flex;
     list-style-type: none;
     position:relative;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    align-items: center;
   }
 
   li p {
-    margin-top: -8px;
     margin-left: 5px;
+    font-size: 25px;
   }
 
   li .legend-text {
@@ -420,19 +424,34 @@ svg {
     flex-direction: column;
   }
 
-  .legend-container {
-    margin-left:0px;
-    padding: 10px 30 px;
+  .svg-container {
+    align-items: center;
+  }
 
+  .legend-container {
+    flex-direction: row;
+    margin-left:0px;
+
+    .legend-title {
+      font-size: 14px;
+    }
+
+    li {
+      margin-right: 5px;
+    }
+
+    li p {
+      margin: 0px 4px 0px 1px;
+      font-size: 16px;
+    }
   }
 
   #fish-info-container {
     max-width:100%;
     width: 100%;
-    flex-shrink: 2;
     margin-left:0px;
-    
   }
+
 
   #single-fish {
     display:flex;
@@ -451,7 +470,7 @@ svg {
   }
   
   svg {
-    margin-top:-60px;
+    margin-top:-210px;
   }
 
   .footer {
@@ -459,9 +478,25 @@ svg {
   }
 }
 
+
+
+
+
+
 @media (max-width: 850px) {
   header {
     padding: 3px 3px;
+  }
+
+
+  .head-container {
+    flex-direction:row;
+    justify-content: center;
+  }
+
+  .svg-container {
+    align-items: start;
+    padding-left: 20px;
   }
 
   .top-header {
@@ -486,7 +521,7 @@ svg {
   }
 
   #search {
-    width:250px;
+    width:190px;
     height:20px;
   }
 
@@ -566,18 +601,22 @@ svg {
     display: none;
   }
 
+
   .legend-container {
-    margin: 5px 0px 0px 0px;
-    width:300px;
-
-    li p {
-      font-size: 16px;
-      margin-top: -4px
-    }
-
+    display:block;
+    padding: 10px 5px;
     .box {
       width:13px;
       height:13px;
+    }
+
+    li {
+      margin-bottom: 0px;
+      margin-right:px;
+    }
+
+    li p {
+      line-height: 1;
     }
 
   }
@@ -591,8 +630,6 @@ svg {
       font-size: 20px;
     }
 
-   
-
     li {
       font-size: 15px;
       list-style: none;
@@ -605,12 +642,6 @@ svg {
     }
 
   
-  }
-
-  svg {
-    margin-top: -2055px;
-    margin-left: -340px;
-    max-height: 110vh;
   }
 
   text.x.label, text.y.label {
@@ -667,11 +698,21 @@ svg {
 
 
 @media (max-width: 400px) {
-  .svg-container {
-    max-height: 100vh;
+  .head-container {
+    flex-direction: column;
+  }
+  .top-header li a {
+    font-size: 13px;
   }
 
+  #search {
+    width: 220px;
+  }
   .footer {
     margin-top:0px;
+  }
+
+  .tick {
+    font-size: 14px;
   }
 }
