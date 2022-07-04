@@ -353,14 +353,6 @@ svg {
   align-items: center;
 }
 
-.icon {
-  width: 75px;
-}
-
-.kick-icon {
-  width: 65px;
-  background: white;
-}
 
 @media (max-width: 1360px) {
   .top-header {
