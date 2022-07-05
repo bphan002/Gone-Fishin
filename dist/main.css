@@ -422,9 +422,9 @@ svg {
     display: none;
   }
 
-  svg {
+  /* svg {
     margin-top: -210px;
-  }
+  } */
 
   .footer {
     margin-top: 0px;
