@@ -494,7 +494,6 @@ svg {
     padding: 3px 3px;
   }
 
-
   .head-container {
     flex-direction:row;
     justify-content: center;
@@ -510,6 +509,7 @@ svg {
 
     li {
       margin-top:5px;
+      padding: 10px 9px;
     }
   }
 
@@ -517,6 +517,7 @@ svg {
     height: 5px;
     font-size:20px;
     margin:0px;
+   
 
   }
 
@@ -706,6 +707,10 @@ svg {
 
   .kick-icon {
     width:45px;
+  }
+
+  #directory {
+    padding: 10px 9px !important;
   }
 
 }
